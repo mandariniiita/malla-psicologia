@@ -30,7 +30,6 @@ const data = [
       }
     ]
   }
-  // Puedes continuar agregando los otros años aquí con el mismo formato
 ];
 
 const estado = {};
