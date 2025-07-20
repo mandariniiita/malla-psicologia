@@ -1,160 +1,171 @@
-// Agrupar los ramos por año y semestre
-const semestres = [
-  {
-    titulo: "1° Año - Semestre 1",
-    ramos: ['fundamentos', 'desarrollo1', 'antropologia', 'comunicativas', 'aprendizaje', 'personal1', 'taller1']
+const datos = {
+  "Primer Año": {
+    "I Semestre": [
+      { nombre: "Fundamentos de la Psicología" },
+      { nombre: "Psicología del Desarrollo I", desbloquea: ["Psicología del Desarrollo II"] },
+      { nombre: "Antropología Social" },
+      { nombre: "Taller de Competencias Comunicativas" },
+      { nombre: "Taller de Competencias para el Aprendizaje" },
+      { nombre: "Taller de Desarrollo Personal", desbloquea: ["Taller de Desarrollo Personal II"] },
+      { nombre: "Taller 1: Autoconocimiento", desbloquea: ["Taller 2: Relaciones Humanas", "Taller 3: Identidad Profesional", "Taller 4: Ética Profesional en Psicología", "Taller 5: Autocuidado"] },
+    ],
+    "II Semestre": [
+      { nombre: "Psicobiología", desbloquea: ["Procesos Neuropsicológicos I", "Procesos Neuropsicológicos II"] },
+      { nombre: "Psicología del Desarrollo II" },
+      { nombre: "Teorías Cognitivas" },
+      { nombre: "Teorías Psicoanalíticas" },
+      { nombre: "Pensamiento Matemático para Ciencias Sociales" },
+      { nombre: "Taller de Desarrollo Personal II" },
+      { nombre: "Taller 2: Relaciones Humanas", desbloquea: ["Taller 3: Identidad Profesional", "Taller 4: Ética Profesional en Psicología", "Taller 5: Autocuidado"] },
+    ]
   },
-  {
-    titulo: "1° Año - Semestre 2",
-    ramos: ['psicobiologia', 'desarrollo2', 'cognitivas', 'psicoanaliticas', 'matematico', 'personal2', 'taller2']
+  "Segundo Año": {
+    "III Semestre": [
+      { nombre: "Procesos Neuropsicológicos I", desbloquea: ["Procesos Neuropsicológicos II"] },
+      { nombre: "Psicología de la Personalidad" },
+      { nombre: "Teorías Humanistas" },
+      { nombre: "Teorías Sistémicas" },
+      { nombre: "Epistemología de la Ciencia Psicológica" },
+      { nombre: "Cultura y Valores" },
+      { nombre: "Inglés Básico I", desbloquea: ["Inglés Básico II"] }
+    ],
+    "IV Semestre": [
+      { nombre: "Procesos Neuropsicológicos II" },
+      { nombre: "Psicología Social" },
+      { nombre: "Psicopatología del Adulto" },
+      { nombre: "Investigación Cualitativa", desbloquea: ["Investigación Cuantitativa", "Estadística para la Psicología", "Psicometría"] },
+      { nombre: "Persona y Sentido" },
+      { nombre: "Inglés Básico II" },
+      { nombre: "Evaluación del Desarrollo de Competencias I", desbloquea: ["Evaluación del Desarrollo de Competencias II"] },
+    ]
   },
-  {
-    titulo: "2° Año - Semestre 1",
-    ramos: ['neuro1', 'personalidad', 'humanistas', 'sistemicas', 'epistemologia', 'valores', 'ingles1']
+  "Tercer Año": {
+    "V Semestre": [
+      { nombre: "Políticas Sociales" },
+      { nombre: "Psicología Comunitaria", desbloquea: ["Diagnóstico en Psicología Comunitaria"] },
+      { nombre: "Evaluación Psicológica Cognitiva", desbloquea: ["Evaluación Socioafectiva"] },
+      { nombre: "Psicología Infanto Juvenil" },
+      { nombre: "Investigación Cuantitativa", desbloquea: ["Estadística para la Psicología", "Psicometría"] },
+      { nombre: "Psicología Organizacional y del Trabajo", desbloquea: ["Diagnóstico en Psicología Organizacional"] },
+    ],
+    "VI Semestre": [
+      { nombre: "Psicología Educacional", desbloquea: ["Diagnóstico en Psicología Educacional"] },
+      { nombre: "Diagnóstico en Psicología Comunitaria" },
+      { nombre: "Evaluación Socioafectiva" },
+      { nombre: "Estadística para la Psicología", desbloquea: ["Psicometría"] },
+      { nombre: "Diagnóstico en Psicología Organizacional" }
+    ]
   },
-  {
-    titulo: "2° Año - Semestre 2",
-    ramos: ['neuro2', 'social', 'psicopatologia', 'investCualitativa', 'personaSentido', 'ingles2', 'eval1']
+  "Cuarto Año": {
+    "VII Semestre": [
+      { nombre: "Diagnóstico en Psicología Educacional" },
+      { nombre: "Diagnóstico en Psicología Clínica" },
+      { nombre: "Psicología Clínica y Psicoterapia", desbloquea: ["Intervención Psicológica I", "Intervención Psicológica II"] },
+      { nombre: "Psicometría" },
+      { nombre: "Electivo 1", desbloquea: ["Electivo 2", "Electivo 3"] },
+      { nombre: "Taller 3: Identidad Personal", desbloquea: ["Taller 4: Ética Profesional en Psicología", "Taller 5: Autocuidado"] },
+      { nombre: "Evaluación del Desarrollo de Competencias II" },
+    ],
+    "VIII Semestre": [
+      { nombre: "Intervención Psicológica I", desbloquea: ["Intervención Psicológica II"] },
+      { nombre: "Proyecto de Investigación en Psicología", desbloquea: ["Seminario de Investigación en Psicología"] },
+      { nombre: "Electivo 2", desbloquea: ["Electivo 3"] },
+      { nombre: "Taller 4: Ética Profesional en Psicología", desbloquea: ["Taller 5: Autocuidado"] }
+    ]
   },
-  {
-    titulo: "3° Año - Semestre 1",
-    ramos: ['politicas', 'comunitaria', 'evalCognitiva', 'infantoJuvenil', 'investCuantitativa', 'orgTrabajo']
-  },
-  {
-    titulo: "3° Año - Semestre 2",
-    ramos: ['educacional', 'diagComunitaria', 'evalSocioafectiva', 'estadistica', 'diagOrganizacional']
-  },
-  {
-    titulo: "4° Año - Semestre 1",
-    ramos: ['diagEducacional', 'diagClinica', 'clinicaYpsicoterapia', 'psicometria', 'electivo1', 'taller3', 'eval2']
-  },
-  {
-    titulo: "4° Año - Semestre 2",
-    ramos: ['intervencion1', 'proyecto', 'electivo2', 'taller4']
-  },
-  {
-    titulo: "5° Año - Semestre 1",
-    ramos: ['intervencion2', 'seminario', 'electivo3', 'taller5']
-  },
-  {
-    titulo: "5° Año - Semestre 2",
-    ramos: ['practica', 'examen']
+  "Quinto Año": {
+    "IX Semestre": [
+      { nombre: "Intervención Psicológica II" },
+      { nombre: "Seminario de Investigación en Psicología" },
+      { nombre: "Electivo 3" },
+      { nombre: "Taller 5: Autocuidado" }
+    ],
+    "X Semestre": [
+      { nombre: "Práctica Profesional Psicológica" },
+      { nombre: "Examen de Título y Grado" }
+    ]
   }
-];
-
-const ramos = {
-  fundamentos: { nombre: 'Fundamentos de la Psicología', requisitos: [] },
-  desarrollo1: { nombre: 'Psicología del Desarrollo I', requisitos: [] },
-  antropologia: { nombre: 'Antropología Social', requisitos: [] },
-  comunicativas: { nombre: 'Taller de Competencias Comunicativas', requisitos: [] },
-  aprendizaje: { nombre: 'Taller de Competencias para el Aprendizaje', requisitos: [] },
-  personal1: { nombre: 'Taller de Desarrollo Personal', requisitos: [] },
-  taller1: { nombre: 'Taller 1: Autoconocimiento', requisitos: [] },
-
-  psicobiologia: { nombre: 'Psicobiología', requisitos: [] },
-  desarrollo2: { nombre: 'Psicología del Desarrollo II', requisitos: ['desarrollo1'] },
-  cognitivas: { nombre: 'Teorías Cognitivas', requisitos: [] },
-  psicoanaliticas: { nombre: 'Teorías Psicoanalíticas', requisitos: [] },
-  matematico: { nombre: 'Pensamiento Matemático para Ciencias Sociales', requisitos: [] },
-  personal2: { nombre: 'Taller de Desarrollo Personal II', requisitos: ['personal1'] },
-  taller2: { nombre: 'Taller 2: Relaciones Humanas', requisitos: ['taller1'] },
-
-  neuro1: { nombre: 'Procesos Neuropsicológicos I', requisitos: ['psicobiologia'] },
-  personalidad: { nombre: 'Psicología de la Personalidad', requisitos: [] },
-  humanistas: { nombre: 'Teorías Humanistas', requisitos: [] },
-  sistemicas: { nombre: 'Teorías Sistémicas', requisitos: [] },
-  epistemologia: { nombre: 'Epistemología de la Ciencia Psicológica', requisitos: [] },
-  valores: { nombre: 'Cultura y Valores', requisitos: [] },
-  ingles1: { nombre: 'Inglés Básico I', requisitos: [] },
-
-  neuro2: { nombre: 'Procesos Neuropsicológicos II', requisitos: ['psicobiologia', 'neuro1'] },
-  social: { nombre: 'Psicología Social', requisitos: [] },
-  psicopatologia: { nombre: 'Psicopatología del Adulto', requisitos: [] },
-  investCualitativa: { nombre: 'Investigación Cualitativa', requisitos: [] },
-  personaSentido: { nombre: 'Persona y Sentido', requisitos: [] },
-  ingles2: { nombre: 'Inglés Básico II', requisitos: ['ingles1'] },
-  eval1: { nombre: 'Evaluación del Desarrollo de Competencias I', requisitos: [] },
-
-  politicas: { nombre: 'Políticas Sociales', requisitos: [] },
-  comunitaria: { nombre: 'Psicología Comunitaria', requisitos: [] },
-  evalCognitiva: { nombre: 'Evaluación Psicológica Cognitiva', requisitos: [] },
-  infantoJuvenil: { nombre: 'Psicología Infanto Juvenil', requisitos: [] },
-  investCuantitativa: { nombre: 'Investigación Cuantitativa', requisitos: ['investCualitativa'] },
-  orgTrabajo: { nombre: 'Psicología Organizacional y del Trabajo', requisitos: [] },
-
-  educacional: { nombre: 'Psicología Educacional', requisitos: [] },
-  diagComunitaria: { nombre: 'Diagnóstico en Psicología Comunitaria', requisitos: ['comunitaria'] },
-  evalSocioafectiva: { nombre: 'Evaluación Socioafectiva', requisitos: ['evalCognitiva'] },
-  estadistica: { nombre: 'Estadística para la Psicología', requisitos: ['investCualitativa', 'investCuantitativa'] },
-  diagOrganizacional: { nombre: 'Diagnóstico en Psicología Organizacional', requisitos: ['orgTrabajo'] },
-
-  diagEducacional: { nombre: 'Diagnóstico en Psicología Educacional', requisitos: ['educacional'] },
-  diagClinica: { nombre: 'Diagnóstico en Psicología Clínica', requisitos: [] },
-  clinicaYpsicoterapia: { nombre: 'Psicología Clínica y Psicoterapia', requisitos: [] },
-  psicometria: { nombre: 'Psicometría', requisitos: ['investCualitativa', 'investCuantitativa', 'estadistica'] },
-  electivo1: { nombre: 'Electivo 1', requisitos: [] },
-  taller3: { nombre: 'Taller 3: Identidad Personal', requisitos: ['taller1', 'taller2'] },
-  eval2: { nombre: 'Evaluación del Desarrollo de Competencias II', requisitos: ['eval1'] },
-
-  intervencion1: { nombre: 'Intervención Psicológica I', requisitos: ['clinicaYpsicoterapia'] },
-  proyecto: { nombre: 'Proyecto de Investigación en Psicología', requisitos: [] },
-  electivo2: { nombre: 'Electivo 2', requisitos: ['electivo1'] },
-  taller4: { nombre: 'Taller 4: Ética Profesional en Psicología', requisitos: ['taller1', 'taller2', 'taller3'] },
-
-  intervencion2: { nombre: 'Intervención Psicológica II', requisitos: ['intervencion1'] },
-  seminario: { nombre: 'Seminario de Investigación en Psicología', requisitos: ['proyecto'] },
-  electivo3: { nombre: 'Electivo 3', requisitos: ['electivo1', 'electivo2'] },
-  taller5: { nombre: 'Taller 5: Autocuidado', requisitos: ['taller1', 'taller2', 'taller3', 'taller4'] },
-
-  practica: { nombre: 'Práctica Profesional Psicológica', requisitos: [] },
-  examen: { nombre: 'Examen de Título y Grado', requisitos: [] }
 };
 
-function crearMalla() {
-  const grid = document.getElementById('malla-grid');
-  semestres.forEach(sem => {
-    const divSemestre = document.createElement('div');
-    divSemestre.classList.add('semestre');
+const estado = {};
 
-    const titulo = document.createElement('h2');
-    titulo.innerText = sem.titulo;
-    divSemestre.appendChild(titulo);
-
-    sem.ramos.forEach(id => {
-      const ramoData = ramos[id];
-      const div = document.createElement('div');
-      div.classList.add('ramo');
-      if (ramoData.requisitos.length > 0) div.classList.add('locked');
-      div.id = id;
-      div.innerText = ramoData.nombre;
-      div.onclick = () => aprobarRamo(id);
-      divSemestre.appendChild(div);
-    });
-
-    grid.appendChild(divSemestre);
-  });
+function crearRamo(nombre) {
+  const div = document.createElement("div");
+  div.className = "ramo bloqueado";
+  div.textContent = nombre;
+  div.dataset.nombre = nombre;
+  div.onclick = () => aprobarRamo(nombre, div);
+  return div;
 }
 
-function aprobarRamo(id) {
-  const ramo = document.getElementById(id);
-  if (!ramo.classList.contains('approved')) {
-    ramo.classList.add('approved');
-    actualizarDesbloqueos();
+function aprobarRamo(nombre, div) {
+  if (div.classList.contains("bloqueado")) return;
+  if (div.classList.contains("aprobado")) return;
+
+  div.classList.add("aprobado");
+
+  for (const año in datos) {
+    for (const semestre in datos[año]) {
+      for (const ramo of datos[año][semestre]) {
+        if (ramo.desbloquea && ramo.desbloquea.includes(nombre)) {
+          const desbloqueador = estado[ramo.nombre];
+          if (!desbloqueador?.classList.contains("aprobado")) {
+            return;
+          }
+        }
+      }
+    }
+  }
+
+  for (const año in datos) {
+    for (const semestre in datos[año]) {
+      for (const ramo of datos[año][semestre]) {
+        if (ramo.desbloquea && ramo.desbloquea.includes(nombre)) {
+          const next = estado[ramo.nombre];
+          if (next) next.classList.remove("bloqueado");
+        }
+      }
+    }
   }
 }
 
-function actualizarDesbloqueos() {
-  Object.keys(ramos).forEach(id => {
-    const reqs = ramos[id].requisitos;
-    if (reqs.length > 0) {
-      const cumplidos = reqs.every(req =>
-        document.getElementById(req)?.classList.contains('approved')
-      );
-      if (cumplidos) {
-        document.getElementById(id).classList.remove('locked');
+function construirMalla() {
+  const contenedor = document.getElementById("malla");
+
+  for (const año in datos) {
+    const divAño = document.createElement("div");
+    divAño.className = "año";
+
+    const tituloAño = document.createElement("div");
+    tituloAño.className = "titulo-año";
+    tituloAño.textContent = año;
+    divAño.appendChild(tituloAño);
+
+    const filaSemestres = document.createElement("div");
+    filaSemestres.className = "semestre";
+
+    for (const semestre in datos[año]) {
+      const columna = document.createElement("div");
+      columna.className = "columna";
+
+      const tituloSemestre = document.createElement("div");
+      tituloSemestre.className = "titulo-semestre";
+      tituloSemestre.textContent = semestre;
+      columna.appendChild(tituloSemestre);
+
+      for (const ramo of datos[año][semestre]) {
+        const div = crearRamo(ramo.nombre);
+        if (!ramo.desbloquea) div.classList.remove("bloqueado");
+        estado[ramo.nombre] = div;
+        columna.appendChild(div);
       }
+
+      filaSemestres.appendChild(columna);
     }
-  });
+
+    divAño.appendChild(filaSemestres);
+    contenedor.appendChild(divAño);
+  }
 }
 
-crearMalla();
+document.addEventListener("DOMContentLoaded", construirMalla);
