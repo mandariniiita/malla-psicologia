@@ -4,6 +4,87 @@ body {
   margin: 0;
   padding: 20px;
 }
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f5fb;
+  margin: 20px;
+  color: #003366;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #004aad;
+}
+.year {
+  margin-bottom: 40px;
+}
+.year-title {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  border-bottom: 3px solid #004aad;
+  padding-bottom: 6px;
+}
+.semesters-container {
+  display: flex;
+  gap: 40px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+.semester {
+  background: #e6f0ff;
+  border-radius: 8px;
+  padding: 15px 12px;
+  min-width: 280px;
+  box-shadow: 0 0 6px rgba(0, 74, 173, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+.semester-title {
+  font-size: 1.3em;
+  margin-bottom: 12px;
+  color: #003366;
+  border-bottom: 2px solid #004aad;
+  padding-bottom: 4px;
+  text-align: center;
+}
+.course-btn {
+  margin: 6px 0;
+  padding: 10px;
+  font-size: 0.9em;
+  text-align: left;
+  border: none;
+  border-radius: 6px;
+  background-color: #0056cc;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  user-select: none;
+}
+.course-btn:hover:not(:disabled) {
+  background-color: #003d99;
+}
+.course-btn:disabled {
+  background-color: #b0bedc;
+  cursor: default;
+  color: #556688;
+}
+.course-btn.approved {
+  background-color: #1a73e8;
+  box-shadow: 0 0 8px #66a3ff;
+}
+/* Scrollbar for horizontal semesters */
+.semesters-container::-webkit-scrollbar {
+  height: 8px;
+}
+.semesters-container::-webkit-scrollbar-track {
+  background: #dbe9ff;
+  border-radius: 8px;
+}
+.semesters-container::-webkit-scrollbar-thumb {
+  background-color: #004aad;
+  border-radius: 8px;
+}
 
 h1 {
   text-align: center;
