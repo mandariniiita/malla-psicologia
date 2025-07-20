@@ -1,62 +1,82 @@
 body {
-  font-family: sans-serif;
-  margin: 20px;
-  background-color: #f9f9f9;
-  color: #333;
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
+  margin: 0;
+  padding: 20px;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 30px;
-  color: #2b6cb0;
+  color: #003366;
 }
 
-#malla-grid {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr); /* 5 años x 2 semestres */
-  gap: 20px;
+.malla {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.año {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .semestre {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  background-color: #e2e8f0;
-  border-radius: 12px;
-  padding: 10px;
-  border: 2px solid #cbd5e0;
+  flex-direction: row;
+  gap: 20px;
 }
 
-.semestre h2 {
-  font-size: 14px;
+.columna {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.titulo-año {
+  font-size: 1.5em;
+  color: #003366;
+  font-weight: bold;
+  border-bottom: 2px solid #003366;
+  margin-bottom: 10px;
+}
+
+.titulo-semestre {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #005599;
   text-align: center;
-  color: #2c5282;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 
 .ramo {
-  background-color: #bee3f8;
-  padding: 8px;
-  border-radius: 8px;
+  padding: 10px;
+  background-color: #e0ecf8;
+  border: 2px solid #005599;
+  border-radius: 5px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 13px;
-  border: 1px solid #90cdf4;
+  transition: background-color 0.3s;
 }
 
-.ramo:hover {
-  background-color: #90cdf4;
+.ramo.bloqueado {
+  background-color: #cccccc;
+  border-color: #999;
+  cursor: not-allowed;
 }
 
-.ramo.approved {
-  background-color: #9ae6b4;
-  border-color: #68d391;
-  color: #22543d;
-  font-weight: bold;
+.ramo.aprobado {
+  background-color: #b3e5fc;
+  border-color: #0288d1;
 }
 
-.ramo.locked {
-  opacity: 0.4;
-  pointer-events: none;
+.ramo:hover:not(.bloqueado):not(.aprobado) {
+  background-color: #d0e7ff;
+}
+
+@media (max-width: 768px) {
+  .semestre {
+    flex-direction: column;
+  }
 }
