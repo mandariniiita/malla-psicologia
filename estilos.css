@@ -1,50 +1,62 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f6ff;
+  font-family: sans-serif;
+  margin: 20px;
+  background-color: #f9f9f9;
   color: #333;
-  text-align: center;
-  margin: 0;
-  padding: 20px;
 }
 
 h1 {
-  color: #1a3c78;
-  margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #2b6cb0;
 }
 
-#malla-container {
+#malla-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
-  max-width: 1200px;
-  margin: auto;
+  grid-template-columns: repeat(10, 1fr); /* 5 años x 2 semestres */
+  gap: 20px;
+}
+
+.semestre {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: #e2e8f0;
+  border-radius: 12px;
+  padding: 10px;
+  border: 2px solid #cbd5e0;
+}
+
+.semestre h2 {
+  font-size: 14px;
+  text-align: center;
+  color: #2c5282;
+  margin-bottom: 4px;
 }
 
 .ramo {
-  background-color: #e0ecff;
-  border: 2px solid #1a3c78;
-  border-radius: 10px;
-  padding: 15px;
+  background-color: #bee3f8;
+  padding: 8px;
+  border-radius: 8px;
+  text-align: center;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  user-select: none;
+  transition: all 0.3s ease;
+  font-size: 13px;
+  border: 1px solid #90cdf4;
 }
 
 .ramo:hover {
-  background-color: #d0e4ff;
-  transform: translateY(-3px);
-}
-
-.ramo.locked {
-  background-color: #cccccc;
-  border-color: #888;
-  cursor: not-allowed;
-  color: #666;
+  background-color: #90cdf4;
 }
 
 .ramo.approved {
-  background-color: #a8e6cf;
-  border-color: #388e3c;
-  color: #155724;
+  background-color: #9ae6b4;
+  border-color: #68d391;
+  color: #22543d;
+  font-weight: bold;
 }
 
+.ramo.locked {
+  opacity: 0.4;
+  pointer-events: none;
+}
