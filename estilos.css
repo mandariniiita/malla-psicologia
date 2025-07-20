@@ -10,10 +10,11 @@ h1 {
   color: #003366;
 }
 
-.malla {
+.malla-container {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  padding: 20px;
 }
 
 .año {
